@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { IoIosArrowForward } from "react-icons/io";
 
 function ActivityContainer() {
   const iconsColors: string[] = [
@@ -22,7 +22,7 @@ function ActivityContainer() {
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr className="hover:bg-gray-100">
               <td className="px-4 py-2 text-left w-1/3">
                 <div className="flex space-x-3">
                   <div className={iconsColors[colorIndex()]}>
@@ -36,7 +36,34 @@ function ActivityContainer() {
               <td className="px-4 py-2 text-left">
                 user.searched_activity_log_events
               </td>
-              <td className="px-4 py-2 text-left">Aug 7, 5:38 PM</td>
+              <td className="px-4 py-2 text-left flex justify-between">
+                <p>Aug 7, 5:38 PM</p>
+                <div>
+                  <IoIosArrowForward />
+                </div>
+              </td>
+            </tr>
+
+            <tr className="hover:bg-gray-100">
+              <td className="px-4 py-2 text-left w-1/3">
+                <div className="flex space-x-3">
+                  <div className={iconsColors[colorIndex()]}>
+                    <span className="mb-1">A</span>
+                  </div>
+                  <p className="font-inter text-base font-normal leading-5 text-left">
+                    ahmocs30@gmail.com
+                  </p>
+                </div>
+              </td>
+              <td className="px-4 py-2 text-left">
+                user.searched_activity_log_events
+              </td>
+              <td className="px-4 py-2 text-left flex justify-between">
+                <p>Aug 7, 5:38 PM</p>
+                <div>
+                  <IoIosArrowForward />
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>
