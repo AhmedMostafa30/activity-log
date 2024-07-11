@@ -4,10 +4,12 @@ import { colorIndex, formatDateString } from "../utils";
 import { useEffect, useState } from "react";
 import React from "react";
 import DetailsContainer from "./DetailsContainer";
+import LoadMoreButton from "./LoadMoreButton";
 
 function ActivityContainer() {
   const [expandedRows, setExpandedRows] = useState(null);
   const [bgColor, setBgColor] = useState("");
+  const [noOfElements, setNoOfElements] = useState(1);
 
   const iconsColors: string[] = [
     "flex items-center justify-center bg-gradient-to-r from-orange-400 via-orange-500 to-purple-800 text-white font-bold h-6 w-6 text-base rounded-full",
@@ -15,9 +17,15 @@ function ActivityContainer() {
     "flex items-center justify-center bg-gradient-to-br from-indigo-800 to-purple-600 text-white font-bold h-6 w-6 text-base rounded-full",
   ];
 
+  const slice = data.slice(0, noOfElements);
+
   useEffect(() => {
     setBgColor(iconsColors[colorIndex()]);
   }, []);
+
+  const handleLoadMore = () => {
+    setNoOfElements(noOfElements + noOfElements);
+  };
 
   // expand table row
   const handleExpandRow = (userId) => {
@@ -45,7 +53,7 @@ function ActivityContainer() {
             </tr>
           </thead>
           <tbody>
-            {data.map((item, index) => (
+            {slice.map((item, index) => (
               <React.Fragment key={item.id}>
                 <tr
                   className="hover:bg-gray-100 cursor-pointer"
@@ -76,6 +84,8 @@ function ActivityContainer() {
             ))}
           </tbody>
         </table>
+
+        <LoadMoreButton onLoadMore={handleLoadMore} />
       </div>
     </div>
   );
