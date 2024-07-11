@@ -1,5 +1,6 @@
 import { IoIosArrowForward } from "react-icons/io";
 import { data } from "../data";
+import { colorIndex, formatDateString } from "../utils";
 
 function ActivityContainer() {
   const iconsColors: string[] = [
@@ -7,51 +8,6 @@ function ActivityContainer() {
     "flex items-center justify-center bg-gradient-to-br from-purple-700 via-pink-600 to-red-500 text-white font-bold h-6 w-6 text-base rounded-full",
     "flex items-center justify-center bg-gradient-to-br from-indigo-800 to-purple-600 text-white font-bold h-6 w-6 text-base rounded-full",
   ];
-  const colorIndex = () => {
-    return Math.floor(Math.random() * 3);
-  };
-
-  function formatDateString(dateString: string): string {
-    const date = new Date(dateString);
-
-    const month = date.getUTCMonth();
-    const dayOfMonth = date.getUTCDate();
-    let hours = date.getUTCHours();
-    const minutes = date.getUTCMinutes();
-
-    const ampm = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12;
-    hours = hours ? hours : 12;
-
-    const formattedString = `${getMonthAbbreviation(
-      month
-    )} ${dayOfMonth}, ${hours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
-
-    return formattedString;
-  }
-
-  function getMonthAbbreviation(month: number): string {
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    return months[month];
-  }
-
-  // Example usage
-  const inputDateString = "2022-01-05T15:31:13.607Z";
-  const formattedDateString = formatDateString(inputDateString);
-  console.log(formattedDateString); // Output: Jan 5, 3:31 PM
 
   return (
     <div className="grid grid-cols-1 gap-2 w-full">
