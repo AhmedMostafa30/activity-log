@@ -1,12 +1,23 @@
 import { IoIosArrowForward } from "react-icons/io";
 import { data } from "../data";
 import { colorIndex, formatDateString } from "../utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import DetailsContainer from "./DetailsContainer";
 
 function ActivityContainer() {
   const [expandedRows, setExpandedRows] = useState(null);
+  const [bgColor, setBgColor] = useState("");
+
+  const iconsColors: string[] = [
+    "flex items-center justify-center bg-gradient-to-r from-orange-400 via-orange-500 to-purple-800 text-white font-bold h-6 w-6 text-base rounded-full",
+    "flex items-center justify-center bg-gradient-to-br from-purple-700 via-pink-600 to-red-500 text-white font-bold h-6 w-6 text-base rounded-full",
+    "flex items-center justify-center bg-gradient-to-br from-indigo-800 to-purple-600 text-white font-bold h-6 w-6 text-base rounded-full",
+  ];
+
+  useEffect(() => {
+    setBgColor(iconsColors[colorIndex()]);
+  }, []);
 
   // expand table row
   const handleExpandRow = (userId) => {
@@ -21,12 +32,6 @@ function ActivityContainer() {
       setExpandedRows(null);
     }
   };
-
-  const iconsColors: string[] = [
-    "flex items-center justify-center bg-gradient-to-r from-orange-400 via-orange-500 to-purple-800 text-white font-bold h-6 w-6 text-base rounded-full",
-    "flex items-center justify-center bg-gradient-to-br from-purple-700 via-pink-600 to-red-500 text-white font-bold h-6 w-6 text-base rounded-full",
-    "flex items-center justify-center bg-gradient-to-br from-indigo-800 to-purple-600 text-white font-bold h-6 w-6 text-base rounded-full",
-  ];
 
   return (
     <div className="grid grid-cols-1 gap-2 w-full">
@@ -48,7 +53,7 @@ function ActivityContainer() {
                 >
                   <td className="px-4 py-2 text-left w-1/3">
                     <div className="flex space-x-3">
-                      <div className={iconsColors[colorIndex()]}>
+                      <div className={bgColor}>
                         <span className="mb-1">{item.actor_name[0]}</span>
                       </div>
                       <p className="font-inter text-base font-normal leading-5 text-left">
