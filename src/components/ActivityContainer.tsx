@@ -1,8 +1,27 @@
 import { IoIosArrowForward } from "react-icons/io";
 import { data } from "../data";
 import { colorIndex, formatDateString } from "../utils";
+import { useState } from "react";
+import React from "react";
+import DetailsContainer from "./DetailsContainer";
 
 function ActivityContainer() {
+  const [expandedRows, setExpandedRows] = useState(null);
+
+  // expand table row
+  const handleExpandRow = (userId) => {
+    let currentExpandedRows = null;
+    const isRowExpanded = currentExpandedRows === userId ? userId : null;
+    const newExpandedRows = isRowExpanded
+      ? null
+      : (currentExpandedRows = userId);
+    if (expandedRows !== userId) {
+      setExpandedRows(newExpandedRows);
+    } else {
+      setExpandedRows(null);
+    }
+  };
+
   const iconsColors: string[] = [
     "flex items-center justify-center bg-gradient-to-r from-orange-400 via-orange-500 to-purple-800 text-white font-bold h-6 w-6 text-base rounded-full",
     "flex items-center justify-center bg-gradient-to-br from-purple-700 via-pink-600 to-red-500 text-white font-bold h-6 w-6 text-base rounded-full",
@@ -21,28 +40,34 @@ function ActivityContainer() {
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => (
-              <tr className="hover:bg-gray-100" key={item.id}>
-                <td className="px-4 py-2 text-left w-1/3">
-                  <div className="flex space-x-3">
-                    <div className={iconsColors[colorIndex()]}>
-                      <span className="mb-1">{item.actor_name[0]}</span>
+            {data.map((item, index) => (
+              <React.Fragment key={item.id}>
+                <tr
+                  className="hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleExpandRow(index)}
+                >
+                  <td className="px-4 py-2 text-left w-1/3">
+                    <div className="flex space-x-3">
+                      <div className={iconsColors[colorIndex()]}>
+                        <span className="mb-1">{item.actor_name[0]}</span>
+                      </div>
+                      <p className="font-inter text-base font-normal leading-5 text-left">
+                        {item.target_name}
+                      </p>
                     </div>
-                    <p className="font-inter text-base font-normal leading-5 text-left">
-                      {item.target_name}
-                    </p>
-                  </div>
-                </td>
-                <td className="px-4 py-2 text-left">
-                  {item.metadata.description}
-                </td>
-                <td className="px-4 py-2 text-left flex justify-between">
-                  <p>{formatDateString(item.occurred_at)}</p>
-                  <div>
-                    <IoIosArrowForward />
-                  </div>
-                </td>
-              </tr>
+                  </td>
+                  <td className="px-4 py-2 text-left">
+                    {item.metadata.description}
+                  </td>
+                  <td className="px-4 py-2 text-left flex justify-between">
+                    <p>{formatDateString(item.occurred_at)}</p>
+                    <div>
+                      <IoIosArrowForward />
+                    </div>
+                  </td>
+                </tr>
+                {expandedRows === index && <DetailsContainer />}
+              </React.Fragment>
             ))}
           </tbody>
         </table>
