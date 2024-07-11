@@ -26,7 +26,7 @@ function ActivityContainer() {
                 <td className="px-4 py-2 text-left w-1/3">
                   <div className="flex space-x-3">
                     <div className={iconsColors[colorIndex()]}>
-                      <span className="mb-1">A</span>
+                      <span className="mb-1">{item.actor_name[0]}</span>
                     </div>
                     <p className="font-inter text-base font-normal leading-5 text-left">
                       {item.target_name}
