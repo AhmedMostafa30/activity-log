@@ -79,7 +79,9 @@ function ActivityContainer() {
                     </div>
                   </td>
                 </tr>
-                {expandedRows === index && <DetailsContainer />}
+                {expandedRows === index && (
+                  <DetailsContainer currIndex={index} />
+                )}
               </React.Fragment>
             ))}
           </tbody>

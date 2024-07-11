@@ -1,7 +1,11 @@
 import { data } from "../data";
 import { formatDateString } from "../utils";
 
-function DetailsContainer() {
+interface Props {
+  currIndex: number;
+}
+
+function DetailsContainer({ currIndex }: Props) {
   return (
     <tr>
       <td colSpan={3}>
@@ -15,7 +19,7 @@ function DetailsContainer() {
                 Name
               </div>
               <div className="text-sm font-normal leading-tight mt-1">
-                {data[0].actor_name}
+                {data[currIndex].actor_name}
               </div>
             </div>
 
@@ -24,7 +28,7 @@ function DetailsContainer() {
                 Email
               </div>
               <div className="text-sm font-normal leading-tight  mt-1">
-                {data[0].target_name}
+                {data[currIndex].target_name}
               </div>
             </div>
 
@@ -33,7 +37,7 @@ function DetailsContainer() {
                 ID
               </div>
               <div className="text-sm font-normal leading-tight mt-1">
-                {data[0].actor_id}
+                {data[currIndex].actor_id}
               </div>
             </div>
           </div>
@@ -47,7 +51,7 @@ function DetailsContainer() {
                 Name
               </div>
               <div className="text-sm font-normal leading-tight mt-1">
-                {data[0].action.name}
+                {data[currIndex].action.name}
               </div>
             </div>
 
@@ -56,7 +60,7 @@ function DetailsContainer() {
                 Object
               </div>
               <div className="text-sm font-normal leading-tight  mt-1">
-                {data[0].action.object}
+                {data[currIndex].action.object}
               </div>
             </div>
 
@@ -65,7 +69,7 @@ function DetailsContainer() {
                 ID
               </div>
               <div className="text-sm font-normal leading-tight mt-1">
-                {data[0].action.id}
+                {data[currIndex].action.id}
               </div>
             </div>
           </div>
@@ -79,7 +83,7 @@ function DetailsContainer() {
                 Readable
               </div>
               <div className="text-sm font-normal leading-tight mt-1">
-                {formatDateString(data[0].occurred_at)}
+                {formatDateString(data[currIndex].occurred_at)}
               </div>
             </div>
           </div>
