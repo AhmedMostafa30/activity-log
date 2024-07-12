@@ -1,3 +1,5 @@
+import { data } from "./data";
+
 export const formatDateString = (dateString: string): string => {
   const date = new Date(dateString);
 
@@ -34,3 +36,46 @@ function getMonthAbbreviation(month: number): string {
   ];
   return months[month];
 }
+
+export const headers = [
+  "actor_name",
+  "actor_id",
+  "target_name",
+  "location",
+  "occurred_at",
+  "description",
+];
+export const mappedData = data.map((item) => ({
+  actor_name: item.actor_name,
+  actor_id: item.actor_id,
+  target_name: item.target_name,
+  location: item.location,
+  occurred_at: item.occurred_at,
+  description: item.metadata.description,
+}));
+
+export const exportToCsv = (
+  filename: string,
+  headers: string[],
+  rows: any[]
+) => {
+  const csvRows = [
+    headers.join(","),
+    ...rows.map((row) => headers.map((header) => row[header]).join(",")),
+  ];
+
+  const csvContent = csvRows.join("\n");
+
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+
+  link.setAttribute("href", url);
+  link.setAttribute("download", filename);
+  document.body.appendChild(link);
+  link.click();
+
+  document.body.removeChild(link);
+};

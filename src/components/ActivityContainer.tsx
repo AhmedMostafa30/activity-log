@@ -1,10 +1,12 @@
 import { IoIosArrowForward } from "react-icons/io";
+import { IoDownloadSharp } from "react-icons/io5";
 import { data } from "../data";
 import { formatDateString } from "../utils";
 import { useEffect, useState } from "react";
 import React from "react";
 import DetailsContainer from "./DetailsContainer";
 import LoadMoreButton from "./LoadMoreButton";
+import { exportToCsv, headers, mappedData } from "../utils";
 
 function ActivityContainer() {
   const [expandedRows, setExpandedRows] = useState<number | null>(null);
@@ -62,16 +64,31 @@ function ActivityContainer() {
     }
   };
 
+  const handleExportCsv = () => {
+    exportToCsv("exported_data.csv", headers, mappedData);
+  };
+
   return (
     <div className="grid grid-cols-1 gap-2 w-full">
       <div className="place-self-center mt-8 rounded-md overflow-hidden w-full">
-        <input
-          className="w-full p-2 border bg-gray-100"
-          placeholder="Search name, email or action..."
-          onChange={(e) => {
-            setSearch(e.target.value);
-          }}
-        />
+        <div className="flex flex-row border bg-gray-100">
+          <input
+            className="w-3/4 p-2 border bg-gray-100 outline-none"
+            placeholder="Search name, email or action..."
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+          <div
+            className="flex flex-row border-1 p-2 bg-gray-100 cursor-pointer"
+            onClick={handleExportCsv}
+          >
+            <div className="mt-1">
+              <IoDownloadSharp />
+            </div>
+            <div className="pb-1 text-gray-600">EXPORT</div>
+          </div>
+        </div>
         <table className="w-full">
           <thead className="bg-gray-100">
             <tr className="text-gray-600">
