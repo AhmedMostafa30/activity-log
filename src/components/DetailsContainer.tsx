@@ -77,17 +77,17 @@ function DetailsContainer({
           <DetailsGrid
             header="date"
             properties={dateProperties}
-            customStyles="items-baseline pl-14"
+            customStyles="items-baseline pl-14 mb-10"
           />
           <DetailsGrid
             header="metadata"
             properties={metaDataProperties}
-            customStyles="mt-4"
+            customStyles="mt-5"
           />
           <DetailsGrid
             header="target"
             properties={targetDataProperties}
-            customStyles="mt-4 ml-2"
+            customStyles="ml-2"
           />
         </div>
       </td>
