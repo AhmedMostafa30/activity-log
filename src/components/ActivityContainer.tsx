@@ -8,9 +8,9 @@ import LoadMoreButton from "./LoadMoreButton";
 
 function ActivityContainer() {
   const [expandedRows, setExpandedRows] = useState<number | null>(null);
-  const [bgColor, setBgColor] = useState("");
-  const [noOfElements, setNoOfElements] = useState(4);
-  const [search, setSearch] = useState("");
+  const [randomClasses, setRandomClasses] = useState<string[]>([]);
+  const [noOfElements, setNoOfElements] = useState<number>(4);
+  const [search, setSearch] = useState<string>("");
 
   const iconsColors: string[] = [
     "flex items-center justify-center bg-gradient-to-r from-orange-400 via-orange-500 to-purple-800 text-white font-bold h-6 w-6 text-base rounded-full",
@@ -19,7 +19,11 @@ function ActivityContainer() {
   ];
 
   useEffect(() => {
-    setBgColor(iconsColors[colorIndex()]);
+    const classes = Array.from({ length: iconsColors.length }, () => {
+      const randomIndex = Math.floor(Math.random() * iconsColors.length);
+      return iconsColors[randomIndex];
+    });
+    setRandomClasses(classes);
   }, []);
 
   const handleLoadMore = () => {
@@ -85,7 +89,9 @@ function ActivityContainer() {
                 >
                   <td className="px-4 py-2 text-left w-1/3">
                     <div className="flex space-x-3">
-                      <div className={bgColor}>
+                      <div
+                        className={randomClasses[index % iconsColors.length]}
+                      >
                         <span className="mb-1">{item.actor_name[0]}</span>
                       </div>
                       <p className="font-inter text-base font-normal leading-5 text-left">
@@ -107,7 +113,7 @@ function ActivityContainer() {
           </tbody>
         </table>
 
-        {filteredData.length < data.length && (
+        {filteredData.length < data.length && search == "" && (
           <LoadMoreButton onLoadMore={handleLoadMore} />
         )}
       </div>

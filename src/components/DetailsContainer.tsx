@@ -39,7 +39,7 @@ function DetailsContainer({
   return (
     <tr>
       <td colSpan={3}>
-        <div className="bg-white shadow-lg rounded-lg p-6 flex flex-row items-center mt-4  space-x-40">
+        <div className="bg-white shadow-lg rounded-lg p-6 flex flex-row items-center space-x-40">
           <div className="flex flex-col">
             <h2 className="text-base font-semibold leading-tight text-left text-gray-600 uppercase">
               actor
