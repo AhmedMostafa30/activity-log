@@ -7,12 +7,10 @@ import DetailsContainer from "./DetailsContainer";
 import LoadMoreButton from "./LoadMoreButton";
 
 function ActivityContainer() {
-  const [expandedRows, setExpandedRows] = useState(null);
+  const [expandedRows, setExpandedRows] = useState<number | null>(null);
   const [bgColor, setBgColor] = useState("");
-  const [noOfElements, setNoOfElements] = useState(1);
+  const [noOfElements, setNoOfElements] = useState(4);
   const [search, setSearch] = useState("");
-  //const [filteredData, setFilteredData] = useState(data);
-  const [slicedData, setSlicedData] = useState(data.slice(0, noOfElements));
 
   const iconsColors: string[] = [
     "flex items-center justify-center bg-gradient-to-r from-orange-400 via-orange-500 to-purple-800 text-white font-bold h-6 w-6 text-base rounded-full",
@@ -46,9 +44,8 @@ function ActivityContainer() {
     })
     .slice(0, noOfElements);
 
-  console.log(filteredData);
   // expand table row
-  const handleExpandRow = (userId) => {
+  const handleExpandRow = (userId: number) => {
     let currentExpandedRows = null;
     const isRowExpanded = currentExpandedRows === userId ? userId : null;
     const newExpandedRows = isRowExpanded
