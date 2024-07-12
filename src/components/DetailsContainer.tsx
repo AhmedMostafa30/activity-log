@@ -39,7 +39,7 @@ function DetailsContainer({
   return (
     <tr>
       <td colSpan={3}>
-        <div className="bg-white shadow-lg rounded-lg p-6 flex flex-row items-center space-x-40">
+        <div className="bg-white shadow-lg rounded-lg p-6 grid grid-cols-3 items-center">
           <div className="flex flex-col">
             <h2 className="text-base font-semibold leading-tight text-left text-gray-600 uppercase">
               actor
@@ -104,7 +104,7 @@ function DetailsContainer({
             </div>
           </div>
 
-          <div className="flex flex-col mb-9">
+          <div className="flex flex-col mb-10">
             <h2 className="text-base font-semibold leading-tight text-left text-gray-600 uppercase">
               date
             </h2>
@@ -114,6 +114,60 @@ function DetailsContainer({
               </div>
               <div className="text-sm font-normal leading-tight mt-1">
                 {formatDateString(occurred_at)}
+              </div>
+            </div>
+          </div>
+          <div className="mt-4 flex flex-col">
+            <div className="text-base font-semibold leading-tight text-left text-gray-600 uppercase">
+              Metadata
+            </div>
+            <div className="flex flex-row justify-start space-x-2">
+              <div className="text-sm font-normal leading-tight text-left text-gray-600 mt-1">
+                Redirect
+              </div>
+              <div className="text-sm font-normal leading-tight mt-1">
+                {metadata.redirect}
+              </div>
+            </div>
+
+            <div className="flex flex-row justify-start space-x-2">
+              <div className="text-sm font-normal leading-tight text-left text-gray-600 mt-1">
+                Description
+              </div>
+              <div className="text-sm font-normal leading-tight mt-1">
+                {metadata.description}
+              </div>
+            </div>
+
+            <div className="flex flex-row justify-start space-x-2">
+              <div className="text-sm font-normal leading-tight text-left text-gray-600 mt-1">
+                xRequestId
+              </div>
+              <div className="text-sm font-normal leading-tight mt-1">
+                {metadata.x_request_id}
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 flex flex-col">
+            <div className="text-base font-semibold leading-tight text-left text-gray-600 uppercase">
+              Target
+            </div>
+            <div className="flex flex-row justify-start space-x-2">
+              <div className="text-sm font-normal leading-tight text-left text-gray-600 mt-1">
+                targetId
+              </div>
+              <div className="text-sm font-normal leading-tight mt-1">
+                {target_id}
+              </div>
+            </div>
+
+            <div className="flex flex-row justify-start space-x-2">
+              <div className="text-sm font-normal leading-tight text-left text-gray-600 mt-1">
+                targetName
+              </div>
+              <div className="text-sm font-normal leading-tight mt-1">
+                {target_name}
               </div>
             </div>
           </div>
