@@ -69,8 +69,16 @@ function DetailsContainer({
       <td colSpan={3}>
         <div className="bg-white shadow-lg rounded-lg p-6 grid grid-cols-3 items-center">
           <DetailsGrid header="actor" properties={actorProperties} />
-          <DetailsGrid header="action" properties={actionProperties} />
-          <DetailsGrid header="date" properties={dateProperties} />
+          <DetailsGrid
+            header="action"
+            properties={actionProperties}
+            customStyles="ml-2"
+          />
+          <DetailsGrid
+            header="date"
+            properties={dateProperties}
+            customStyles="items-baseline pl-14"
+          />
           <DetailsGrid
             header="metadata"
             properties={metaDataProperties}
@@ -79,7 +87,7 @@ function DetailsContainer({
           <DetailsGrid
             header="target"
             properties={targetDataProperties}
-            customStyles="mt-4"
+            customStyles="mt-4 ml-2"
           />
         </div>
       </td>

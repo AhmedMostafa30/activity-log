@@ -1,7 +1,3 @@
-export const colorIndex = () => {
-  return Math.floor(Math.random() * 3);
-};
-
 export const formatDateString = (dateString: string): string => {
   const date = new Date(dateString);
 

@@ -1,6 +1,6 @@
 import { IoIosArrowForward } from "react-icons/io";
 import { data } from "../data";
-import { colorIndex, formatDateString } from "../utils";
+import { formatDateString } from "../utils";
 import { useEffect, useState } from "react";
 import React from "react";
 import DetailsContainer from "./DetailsContainer";
