@@ -10,14 +10,15 @@ function ActivityContainer() {
   const [expandedRows, setExpandedRows] = useState(null);
   const [bgColor, setBgColor] = useState("");
   const [noOfElements, setNoOfElements] = useState(1);
+  const [search, setSearch] = useState("");
+  //const [filteredData, setFilteredData] = useState(data);
+  const [slicedData, setSlicedData] = useState(data.slice(0, noOfElements));
 
   const iconsColors: string[] = [
     "flex items-center justify-center bg-gradient-to-r from-orange-400 via-orange-500 to-purple-800 text-white font-bold h-6 w-6 text-base rounded-full",
     "flex items-center justify-center bg-gradient-to-br from-purple-700 via-pink-600 to-red-500 text-white font-bold h-6 w-6 text-base rounded-full",
     "flex items-center justify-center bg-gradient-to-br from-indigo-800 to-purple-600 text-white font-bold h-6 w-6 text-base rounded-full",
   ];
-
-  const slice = data.slice(0, noOfElements);
 
   useEffect(() => {
     setBgColor(iconsColors[colorIndex()]);
@@ -27,6 +28,25 @@ function ActivityContainer() {
     setNoOfElements(noOfElements + noOfElements);
   };
 
+  const filteredData = data
+    .filter((item) => {
+      const searchTerm = search.toLowerCase();
+      if (searchTerm === "") {
+        return true; // Return true to include all items if search is empty
+      }
+
+      // Convert fields to lowercase and check if they include the search term
+      return (
+        item.actor_name.toLowerCase().includes(searchTerm) ||
+        item.target_name.toLowerCase().includes(searchTerm) ||
+        item.action.id.toLowerCase().includes(searchTerm) ||
+        item.action.name.toLowerCase().includes(searchTerm) ||
+        item.action.object.toLowerCase().includes(searchTerm)
+      );
+    })
+    .slice(0, noOfElements);
+
+  console.log(filteredData);
   // expand table row
   const handleExpandRow = (userId) => {
     let currentExpandedRows = null;
@@ -44,6 +64,13 @@ function ActivityContainer() {
   return (
     <div className="grid grid-cols-1 gap-2 w-full">
       <div className="place-self-center mt-8 rounded-md overflow-hidden w-full">
+        <input
+          className="w-full p-2 border bg-gray-100"
+          placeholder="Search name, email or action..."
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+        />
         <table className="w-full">
           <thead className="bg-gray-100">
             <tr className="text-gray-600">
@@ -53,7 +80,7 @@ function ActivityContainer() {
             </tr>
           </thead>
           <tbody>
-            {slice.map((item, index) => (
+            {filteredData.map((item, index) => (
               <React.Fragment key={item.id}>
                 <tr
                   className="hover:bg-gray-100 cursor-pointer"
@@ -69,9 +96,7 @@ function ActivityContainer() {
                       </p>
                     </div>
                   </td>
-                  <td className="px-4 py-2 text-left">
-                    {item.metadata.description}
-                  </td>
+                  <td className="px-4 py-2 text-left">{item.action.name}</td>
                   <td className="px-4 py-2 text-left flex justify-between">
                     <p>{formatDateString(item.occurred_at)}</p>
                     <div>
@@ -79,15 +104,15 @@ function ActivityContainer() {
                     </div>
                   </td>
                 </tr>
-                {expandedRows === index && (
-                  <DetailsContainer currIndex={index} />
-                )}
+                {expandedRows === index && <DetailsContainer {...item} />}
               </React.Fragment>
             ))}
           </tbody>
         </table>
 
-        <LoadMoreButton onLoadMore={handleLoadMore} />
+        {filteredData.length < data.length && (
+          <LoadMoreButton onLoadMore={handleLoadMore} />
+        )}
       </div>
     </div>
   );

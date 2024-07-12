@@ -2,10 +2,40 @@ import { data } from "../data";
 import { formatDateString } from "../utils";
 
 interface Props {
-  currIndex: number;
+  id: string;
+  object: string;
+  actor_id: string;
+  actor_name: string;
+  group: string;
+  action: {
+    id: string;
+    object: string;
+    name: string;
+  };
+  target_id: string;
+  target_name: string;
+  location: string;
+  occurred_at: string;
+  metadata: {
+    redirect: string;
+    description: string;
+    x_request_id: string;
+  };
 }
 
-function DetailsContainer({ currIndex }: Props) {
+function DetailsContainer({
+  id,
+  object,
+  actor_id,
+  actor_name,
+  group,
+  action,
+  target_id,
+  target_name,
+  location,
+  occurred_at,
+  metadata,
+}: Props) {
   return (
     <tr>
       <td colSpan={3}>
@@ -19,7 +49,7 @@ function DetailsContainer({ currIndex }: Props) {
                 Name
               </div>
               <div className="text-sm font-normal leading-tight mt-1">
-                {data[currIndex].actor_name}
+                {actor_name}
               </div>
             </div>
 
@@ -28,7 +58,7 @@ function DetailsContainer({ currIndex }: Props) {
                 Email
               </div>
               <div className="text-sm font-normal leading-tight  mt-1">
-                {data[currIndex].target_name}
+                {target_name}
               </div>
             </div>
 
@@ -37,7 +67,7 @@ function DetailsContainer({ currIndex }: Props) {
                 ID
               </div>
               <div className="text-sm font-normal leading-tight mt-1">
-                {data[currIndex].actor_id}
+                {actor_id}
               </div>
             </div>
           </div>
@@ -51,7 +81,7 @@ function DetailsContainer({ currIndex }: Props) {
                 Name
               </div>
               <div className="text-sm font-normal leading-tight mt-1">
-                {data[currIndex].action.name}
+                {action.name}
               </div>
             </div>
 
@@ -60,7 +90,7 @@ function DetailsContainer({ currIndex }: Props) {
                 Object
               </div>
               <div className="text-sm font-normal leading-tight  mt-1">
-                {data[currIndex].action.object}
+                {action.object}
               </div>
             </div>
 
@@ -69,7 +99,7 @@ function DetailsContainer({ currIndex }: Props) {
                 ID
               </div>
               <div className="text-sm font-normal leading-tight mt-1">
-                {data[currIndex].action.id}
+                {action.id}
               </div>
             </div>
           </div>
@@ -83,7 +113,7 @@ function DetailsContainer({ currIndex }: Props) {
                 Readable
               </div>
               <div className="text-sm font-normal leading-tight mt-1">
-                {formatDateString(data[currIndex].occurred_at)}
+                {formatDateString(occurred_at)}
               </div>
             </div>
           </div>
